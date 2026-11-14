@@ -1,0 +1,181 @@
+{
+  "exchanges": [
+    {
+      "path": "/register",
+      "method": "GET",
+      "body": {
+        "logicalName": "1.0.1.8.0.255",
+        "value": 1250,
+        "scaler": -1,
+        "unit": "kWh"
+      },
+      "requires": {},
+      "sets": {},
+      "status": 200,
+      "query": {}
+    },
+    {
+      "path": "/profiles/load",
+      "method": "GET",
+      "body": {
+        "captureVersion": "c1",
+        "captureObjects": [
+          "clock",
+          "energy"
+        ],
+        "entriesInUse": 2,
+        "meterEpoch": "e1"
+      },
+      "requires": {},
+      "sets": {},
+      "status": 200,
+      "query": {}
+    },
+    {
+      "path": "/profiles/load/entries",
+      "method": "GET",
+      "body": {
+        "meterEpoch": "e1",
+        "rows": [
+          {
+            "entry": 1,
+            "captureVersion": "c1",
+            "clock": {
+              "local": "2026-10-25T02:30:00",
+              "deviation": -120,
+              "status": 0
+            },
+            "values": [
+              1250
+            ]
+          }
+        ],
+        "nextEntry": 2
+      },
+      "requires": {},
+      "sets": {},
+      "status": 200,
+      "query": {
+        "fromEntry": "1"
+      }
+    },
+    {
+      "path": "/captures/c1",
+      "method": "GET",
+      "body": {
+        "columns": [
+          {
+            "logicalName": "energy",
+            "attribute": 2,
+            "scaler": -1,
+            "unit": "kWh"
+          }
+        ]
+      },
+      "requires": {},
+      "sets": {},
+      "status": 200,
+      "query": {}
+    },
+    {
+      "path": "/profiles/load/time",
+      "method": "GET",
+      "body": {
+        "meterEpoch": "e1",
+        "rows": [
+          {
+            "entry": 1,
+            "captureVersion": "c1",
+            "clock": {
+              "local": "2026-10-25T02:30:00",
+              "deviation": -120,
+              "status": 0
+            },
+            "values": [
+              1250
+            ]
+          },
+          {
+            "entry": 2,
+            "captureVersion": "c1",
+            "clock": {
+              "local": "2026-10-25T02:45:00",
+              "deviation": -120,
+              "status": 0
+            },
+            "values": [
+              1251
+            ]
+          }
+        ],
+        "complete": true
+      },
+      "requires": {},
+      "sets": {},
+      "status": 200,
+      "query": {}
+    }
+  ],
+  "cases": {
+    "clock-fold": [
+      {
+        "path": "/profiles/load/entries",
+        "method": "GET",
+        "body": {
+          "meterEpoch": "e1",
+          "rows": [
+            {
+              "entry": 1,
+              "captureVersion": "c1",
+              "clock": {
+                "local": "2026-10-25T02:30:00",
+                "deviation": -120,
+                "status": 0
+              },
+              "values": [
+                1250
+              ]
+            },
+            {
+              "entry": 2,
+              "captureVersion": "c2",
+              "clock": {
+                "local": "2026-10-25T02:30:00",
+                "deviation": -60,
+                "status": 0
+              },
+              "values": [
+                1251
+              ]
+            }
+          ],
+          "nextEntry": null
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {
+          "fromEntry": "1"
+        }
+      },
+      {
+        "path": "/captures/c2",
+        "method": "GET",
+        "body": {
+          "columns": [
+            {
+              "logicalName": "energy",
+              "attribute": 2,
+              "scaler": 2,
+              "unit": "Wh"
+            }
+          ]
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {}
+      }
+    ]
+  }
+}
