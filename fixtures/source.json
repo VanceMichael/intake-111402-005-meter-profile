@@ -117,6 +117,48 @@
     }
   ],
   "cases": {
+    "capture-retired": [
+      {
+        "path": "/profiles/load/entries",
+        "method": "GET",
+        "body": {
+          "meterEpoch": "e1",
+          "rows": [
+            {
+              "entry": 1,
+              "captureVersion": "c0",
+              "clock": {
+                "local": "2026-10-24T23:00:00",
+                "deviation": -120,
+                "status": 0
+              },
+              "values": [
+                1249
+              ]
+            },
+            {
+              "entry": 2,
+              "captureVersion": "c1",
+              "clock": {
+                "local": "2026-10-25T02:30:00",
+                "deviation": -120,
+                "status": 0
+              },
+              "values": [
+                1250
+              ]
+            }
+          ],
+          "nextEntry": null
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {
+          "fromEntry": "1"
+        }
+      }
+    ],
     "clock-fold": [
       {
         "path": "/profiles/load/entries",

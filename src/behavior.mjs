@@ -2,7 +2,7 @@ export function behavior(entry,state,fixture,scenario) {
 if (entry.path === '/profiles/load/time') {
   const candidates = [...(fixture.cases[scenario] ?? []),...fixture.exchanges].find(route => route.path === '/profiles/load/entries' && route.query.fromEntry === '1').body.rows;
   const defaultRows = fixture.exchanges.find(route => route.path === '/profiles/load/time').body.rows;
-  const rows = scenario === 'clock-fold' ? candidates : defaultRows;
+  const rows = fixture.cases[scenario] ? candidates : defaultRows;
   const from = Date.parse(entry.query.from), to = Date.parse(entry.query.to);
   if (!Number.isFinite(from) || !Number.isFinite(to) || from >= to) return {status:400,body:{error:'time range required'}};
   return {body:{meterEpoch:'e1',complete:true,rows:rows.filter(row => {const time = Date.parse(row.clock.local+'Z')+row.clock.deviation*60000;return time >= from && time < to;})}};
