@@ -117,6 +117,60 @@
     }
   ],
   "cases": {
+    "capture-unavailable": [
+      {
+        "path": "/profiles/load/entries",
+        "method": "GET",
+        "body": {
+          "meterEpoch": "e1",
+          "rows": [
+            {
+              "entry": 1,
+              "captureVersion": "c1",
+              "clock": {
+                "local": "2026-10-25T02:30:00",
+                "deviation": -120,
+                "status": 0
+              },
+              "values": [
+                1250
+              ]
+            },
+            {
+              "entry": 2,
+              "captureVersion": "c-old",
+              "clock": {
+                "local": "2026-10-25T02:45:00",
+                "deviation": -120,
+                "status": 0
+              },
+              "values": [
+                1251
+              ]
+            },
+            {
+              "entry": 3,
+              "captureVersion": "c-old",
+              "clock": {
+                "local": "2026-10-25T03:00:00",
+                "deviation": -120,
+                "status": 0
+              },
+              "values": [
+                1252
+              ]
+            }
+          ],
+          "nextEntry": null
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {
+          "fromEntry": "1"
+        }
+      }
+    ],
     "clock-fold": [
       {
         "path": "/profiles/load/entries",

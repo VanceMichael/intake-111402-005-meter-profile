@@ -24,10 +24,10 @@ Dockerfile 固定 Node 镜像摘要。首次使用需预载该镜像，运行和
 
 ## 工程结构
 
-- src/reader.mjs 是当前来源适配器；不修改来源来迎合适配结果。
-- src/source.mjs 与 src/behavior.mjs 实现本地来源网关，契约见 contracts.md。
+- src/reader.mjs 是当前来源适配器；不修改来源来迎合适配结果。它按每段曲线自身的 capture 版本解释倍率与单位，保留原值并用 `meterEpoch:entry` 作稳定标识。
+- src/source.mjs 与 src/behavior.mjs 实现本地来源网关，契约见 contracts.md。场景 `normal`、`clock-fold`（夏令时回拨）与 `capture-unavailable`（旧定义被拒）可用 SCENARIO 选择。
 - src/archive.mjs 保存来源与内容摘要；同内容重收不新增，内容变化保留版本。
-- src/api.mjs 提供收件查询；.state 为运行状态，停止后可删除恢复空收件箱。
+- src/api.mjs 提供收件查询；.state 为运行状态，停止后可删除恢复空收件箱。profile-cursor.json 记录续抄位置。
 - fixtures/source.json 是虚构来源资料和状态变化，不含真实账号、交易或个人数据。
 
 环境变量 DATA_DIR、PORT、SOURCE_PORT 控制目录和端口；SCENARIO 选择本地来源资料版本。测试和演示自己创建空目录，不依赖上次执行遗留状态。
